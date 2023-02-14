@@ -42,25 +42,25 @@ namespace Authentication.Controllers
             return Ok(loginview);
         }
 
-        [HttpPost("APILogin")]
-        public async Task<IActionResult> AddUser(UserLogin userLogin)
-        {
-            var user = _context.logins.FirstOrDefault(x => x.UserName == userLogin.UserName);
-            if (user == null)
-            {
-                return BadRequest("Please Insert Some Data");
-            }
-            var hmac = new HMACSHA256(user.PasswordSalt);
-            var hmacdata = hmac.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password));
-            if (hmacdata.SequenceEqual(user.Password))
-            {
-                return Ok("Successfull");
-            }
-            else
-            {
-                return NotFound("Unsuccessfull");
-            }
-        }
+        //[HttpPost("APILogin")]
+        //public async Task<IActionResult> AddUser(UserLogin userLogin)
+        //{
+        //    var user = _context.logins.FirstOrDefault(x => x.UserName == userLogin.UserName);
+        //    if (user == null)
+        //    {
+        //        return BadRequest("Please Insert Some Data");
+        //    }
+        //    var hmac = new HMACSHA256(user.PasswordSalt);
+        //    var hmacdata = hmac.ComputeHash(Encoding.ASCII.GetBytes(userLogin.Password));
+        //    if (hmacdata.SequenceEqual(user.Password))
+        //    {
+        //        return Ok("Successfull");
+        //    }
+        //    else
+        //    {
+        //        return NotFound("Unsuccessfull");
+        //    }
+        //}
 
         [HttpDelete]
         public async Task<IActionResult> DeleteData(int id)
